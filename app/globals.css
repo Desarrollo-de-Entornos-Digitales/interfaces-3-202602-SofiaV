@@ -1,2 +1,28 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "icesi";
+  default: true;
+  --color-primary: #5454e9;
+  --color-primary-content: #ffffff;
+  --color-secondary: #865cf0;
+  --color-secondary-content: #ffffff;
+  --color-accent: #4cb979;
+  --color-accent-content: #ffffff;
+  --color-neutral: #1e293b;
+  --color-neutral-content: #ffffff;
+  --color-info: #5454e9;
+  --color-info-content: #ffffff;
+  --color-success: #4cb979;
+  --color-success-content: #ffffff;
+  --color-warning: #e4eb60;
+  --color-warning-content: #1f2937;
+  --color-error: #e9683b;
+  --color-error-content: #ffffff;
+  --color-base-100: #ffffff;
+  --color-base-200: #f8fafc;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #1e293b;
+}
+

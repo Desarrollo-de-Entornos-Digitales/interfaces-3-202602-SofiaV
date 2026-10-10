@@ -1,11 +1,15 @@
+import ActionButton from "@/components/action-button";
+import StatusBadge from "@/components/status-badge";
+import AlertBanner from "@/components/alert-banner";
+import UserAvatar from "@/components/user-avatar";
+
 export default function Home() {
-    return (
-        <div className=" font-sans dark:bg-black">
-            <main className="bg-white dark:bg-black sm:items-start">
-                <div>
-                    <h1>Hola en Next</h1>
-                </div>
-            </main>
-        </div>
-    );
+  return (
+    <main className="p-8 space-y-6">
+      <ActionButton />
+      <StatusBadge />
+      <AlertBanner />
+      <UserAvatar />
+    </main>
+  );
 }
