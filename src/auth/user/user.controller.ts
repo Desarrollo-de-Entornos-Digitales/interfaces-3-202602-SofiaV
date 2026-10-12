@@ -16,36 +16,40 @@ import { AuthGuard } from '@nestjs/passport';
 import { PositiveIntPipe } from '../../common/pipes/positive-int-pipe';
 import { PermissionsGuard } from '../guards/permissions/permissions.guard';
 import { Permissions } from '../decorators/permissions.decorator';
+import { PERMISSIONS } from '../constants/permissions.constants';
 
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
+@UseGuards(AuthGuard('jwt'), PermissionsGuard)
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post()
+    @Permissions(PERMISSIONS.MANAGE_USERS)
     @HttpCode(HttpStatus.CREATED)
     create(@Body() createUserDto: CreateUserDto) {
         return this.userService.create(createUserDto);
     }
 
     @Get()
+    @Permissions(PERMISSIONS.MANAGE_USERS)
     @HttpCode(HttpStatus.OK)
-    @UseGuards(AuthGuard('jwt'), PermissionsGuard)
-    @Permissions('manage_users')
     findAll() {
         return this.userService.findAll();
     }
 
     @Get(':id')
+    @Permissions(PERMISSIONS.MANAGE_USERS)
     @HttpCode(HttpStatus.OK)
     findOne(@Param('id', PositiveIntPipe) id: number) {
         return this.userService.findOne(id);
     }
 
     @Patch(':id')
+    @Permissions(PERMISSIONS.MANAGE_USERS)
     @HttpCode(HttpStatus.OK)
     async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
         try {
@@ -63,6 +67,7 @@ export class UserController {
     }
 
     @Delete(':id')
+    @Permissions(PERMISSIONS.MANAGE_USERS)
     @HttpCode(HttpStatus.NO_CONTENT)
     async remove(@Param('id') id: string) {
         await this.userService.remove(+id);

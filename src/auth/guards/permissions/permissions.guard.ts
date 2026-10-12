@@ -14,7 +14,7 @@ export class PermissionsGuard implements CanActivate {
     constructor(private readonly reflector: Reflector) {}
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
         // 1. Extraemos los permisos requeridos del método manejador
-        const requiredPermissions = this.reflector.get<string[]>(PERMISSIONS_KEY, context.getHandler());
+        const requiredPermissions = this.reflector.getAllAndOverride<string[]>(PERMISSIONS_KEY, [context.getHandler(), context.getClass()]);
 
         if (!requiredPermissions || requiredPermissions.length === 0) {
             return true;
